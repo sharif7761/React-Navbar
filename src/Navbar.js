@@ -4,30 +4,38 @@ import { links, social } from './data'
 import logo from './logo.svg'
 
 const Navbar = () => {
+
+  const [showLinks, setShowLinks]= useState(false)
+
   return (
       <nav>
         <div class='nav-center'>
           <div class='nav-header'>
             <img src={logo} alt='logo'/>
-            <button class='nav-toggle'>
+            <button class='nav-toggle' onClick={() => setShowLinks(!showLinks)}>
               <FaBars />
             </button>
           </div>
-          <div class='links-container show-container'>
-            <ul class='links'>
-              {
-                links.map((link) => {
-                  const {id, url, text} = link
-                  return (
-                      <li key={id}>
-                        <a href={url}>{text}</a>
-                      </li>
-                  )
-                })
-              }
+          {
+            showLinks && (
+                <div class='links-container show-container'>
+                  <ul class='links'>
+                    {
+                      links.map((link) => {
+                        const {id, url, text} = link
+                        return (
+                            <li key={id}>
+                              <a href={url}>{text}</a>
+                            </li>
+                        )
+                      })
+                    }
 
-            </ul>
-          </div>
+                  </ul>
+                </div>
+            )
+          }
+
           <ul class='social-icons'>
             {
               social.map((socailIcon) => {
